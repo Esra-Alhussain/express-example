@@ -4,12 +4,25 @@ import data from './data/data.json'
 const app = express();  //create a variable tat will hold copy of express
 const PORT = 3000;
 
-app.listen(PORT, () =>  {    //listen to the port that we just created 
-   console.log(`Yourr server is runing on port ${PORT}`);
+     app.listen(PORT, () =>  {    //listen to the port that we just created 
+     console.log(`Yourr server is runing on port ${PORT}`);
 
-   //load data file on the server
-   console.log(data);
-});
+     //load data file on the server
+     console.log(data);
+     });
+
+     app.get('/item/end', (req,res) =>
+     res.end()
+     );
+
+     app.get('/item/linkedin', (req,res) =>
+     res.redirect('https://www.linkedin.com')
+     );
+
+     app.get('/images', (req,res) => 
+     res.download('images/tent.jpg')
+     );
+
    //not specifing the path before using the method, its going to be available in the default path / 
    app.use(express.static('public'));  //mention which folder are you using for static file
 
@@ -38,16 +51,12 @@ app.listen(PORT, () =>  {    //listen to the port that we just created
       console.log('Did you get the right data?')
    );
 
-   app.get('/item/end', (req,res) =>
-      res.end()
-   );
-
    //sending data to the server to the DB
    app.post('/newItem', (req,res) => 
         res.send(`post request with /newItem route on port ${PORT}`)
    );
 
-   //put = update 
+   //update 
    app.put('/item', (req,res) => 
         res.send(`put request with /item route on port ${PORT}`)
    );
