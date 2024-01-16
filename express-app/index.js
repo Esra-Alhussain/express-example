@@ -26,14 +26,18 @@ app.listen(PORT, () =>  {    //listen to the port that we just created
 
      //pass the request response
      //pass the id as number but it will be received as string 
-   app.get('/item/:id', (req,res) => {
+   app.get('/item/:id', (req,res, next ) => {
      //make sure that i get what i want by passing the params 
      console.log(req.params.id);
      let user = Number(req.params.id) //convert the string from the params that i recive to number 
      console.log(user);
      console.log(data[user]); //get inside the JSON file and return the item that we requested, pull the user from it 
      res.send(data[user]);
-   })
+     next();     //call next 
+   },(req,res) =>   //here is the second function will start 
+      console.log('Did you get the right data?')
+   );
+
    //sending data to the server to the DB
    app.post('/newItem', (req,res) => 
         res.send(`post request with /newItem route on port ${PORT}`)
