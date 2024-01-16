@@ -1,0 +1,7 @@
+//create object to have preset
+{
+    "presets": [
+        "env",
+        "stage-0"
+    ]
+}
