@@ -38,6 +38,10 @@ app.listen(PORT, () =>  {    //listen to the port that we just created
       console.log('Did you get the right data?')
    );
 
+   app.get('/item/end', (req,res) =>
+      res.end()
+   );
+
    //sending data to the server to the DB
    app.post('/newItem', (req,res) => 
         res.send(`post request with /newItem route on port ${PORT}`)
