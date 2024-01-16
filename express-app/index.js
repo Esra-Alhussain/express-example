@@ -10,11 +10,18 @@ app.listen(PORT, () =>  {    //listen to the port that we just created
    //load data file on the server
    console.log(data);
 });
+   //if we did not specify the path before using the method, its going to be available in the default path / 
+   app.use(express.static('public'));  //mention which folder are you using for static file
+
+   //Create a specific path for images folder on path images 
+   app.use('/images', express.static('images'));
 
    //route = provide you with the data or fille that you requested 
    //getting data == and response with data / take the path of that command and passing arguments (request & response)
    app.get('/', (req, res) => 
-        res.send(` get a request with / route on port ${PORT}`)
+     //    res.send(` get a request with / route on port ${PORT}`)
+     //get data first 
+     res.json(data)  //response with the data
    );
 
    //sennding data to the server to the DB
