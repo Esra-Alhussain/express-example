@@ -12,7 +12,25 @@ app.listen(PORT, () =>  {    //listen to the port that we just created
 });
 
    //route = provide you with the data or fille that you requested 
-   //take the path of that command and passing arguments (request & response)
+   //getting data == and response with data / take the path of that command and passing arguments (request & response)
    app.get('/', (req, res) => 
         res.send(` get a request with / route on port ${PORT}`)
-   )
+   );
+
+   //sennding data to the server to the DB
+   app.post('/newItem', (req,res) => 
+        res.send(`post request with /newItem route on port ${PORT}`)
+   );
+
+   //put = update 
+   app.put('/item', (req,res) => 
+        res.send(`put request with /item route on port ${PORT}`)
+   );
+
+   //put = update 
+   app.delete('/item', (req,res) => 
+        res.send(`delete request with /item route on port ${PORT}`)
+   );
+
+
+
