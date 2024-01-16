@@ -10,7 +10,7 @@ app.listen(PORT, () =>  {    //listen to the port that we just created
    //load data file on the server
    console.log(data);
 });
-   //if we did not specify the path before using the method, its going to be available in the default path / 
+   //not specifing the path before using the method, its going to be available in the default path / 
    app.use(express.static('public'));  //mention which folder are you using for static file
 
    //Create a specific path for images folder on path images 
@@ -24,7 +24,17 @@ app.listen(PORT, () =>  {    //listen to the port that we just created
      res.json(data)  //response with the data
    );
 
-   //sennding data to the server to the DB
+     //pass the request response
+     //pass the id as number but it will be received as string 
+   app.get('/item/:id', (req,res) => {
+     //make sure that i get what i want by passing the params 
+     console.log(req.params.id);
+     let user = Number(req.params.id) //convert the string from the params that i recive to number 
+     console.log(user);
+     console.log(data[user]); //get inside the JSON file and return the item that we requested, pull the user from it 
+     res.send(data[user]);
+   })
+   //sending data to the server to the DB
    app.post('/newItem', (req,res) => 
         res.send(`post request with /newItem route on port ${PORT}`)
    );
