@@ -10,3 +10,9 @@ app.listen(PORT, () =>  {    //listen to the port that we just created
    //load data file on the server
    console.log(data);
 });
+
+   //route = provide you with the data or fille that you requested 
+   //take the path of that command and passing arguments (request & response)
+   app.get('/', (req, res) => 
+        res.send(` get a request with / route on port ${PORT}`)
+   )
