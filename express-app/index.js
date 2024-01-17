@@ -38,7 +38,8 @@ const PORT = 3000;
      //hello = URLEncoded+is+cool
 
      //method to use JSON
-     app.use(express.json())
+     // app.use(express.json());
+     app.use(express.urlencoded({extended: true}))      //extended=> explicit the QS stringfy version to use
      //create the post and the url route that we need to do the post 
      app.post('/newItem', (req, res) =>{
           console.log(req.body);
