@@ -27,15 +27,31 @@ const PORT = 3000;
    app.use(express.static('public'));  //mention which folder are you using for static file
 
    //Create a specific path for images folder on path images 
-   app.use('/images', express.static('images'));
+   app.use('/item', express.static('images'));
 
    //route = provide you with the data or fille that you requested 
    //getting data == and response with data / take the path of that command and passing arguments (request & response)
    app.get('/', (req, res) => 
      //    res.send(` get a request with / route on port ${PORT}`)
      //get data first 
-     res.json(data)  //response with the data
+         res.json(data)  //response with the data
    );
+
+   //created a route method that will pass /tem path and there is a get function within the route and passes the req and res
+   app.route('item')
+      .get((req, res) => {
+          res.send(` a get request with /item route on port ${PORT}`)
+      })
+      //update 
+      .put((req, res) => 
+          res.send(`put request with /item route on port ${PORT}`)
+      )
+      
+     //delete
+     .delete((req,res) => 
+          res.send(`delete request with /item route on port ${PORT}`)
+     );
+
 
      //pass the request response
      //pass the id as number but it will be received as string 
@@ -52,19 +68,10 @@ const PORT = 3000;
    );
 
    //sending data to the server to the DB
-   app.post('/newItem', (req,res) => 
+   app.post('/item', (req,res) => 
         res.send(`post request with /newItem route on port ${PORT}`)
    );
 
-   //update 
-   app.put('/item', (req,res) => 
-        res.send(`put request with /item route on port ${PORT}`)
-   );
-
-   //put = update 
-   app.delete('/item', (req,res) => 
-        res.send(`delete request with /item route on port ${PORT}`)
-   );
 
 
 
