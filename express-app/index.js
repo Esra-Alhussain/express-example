@@ -23,12 +23,28 @@ const PORT = 3000;
      res.download('images/tent.jpg')
      );
 
-   //not specifing the path before using the method, its going to be available in the default path / 
-   app.use(express.static('public'));  //mention which folder are you using for static file
+     //not specifing the path before using the method, its going to be available in the default path / 
+     app.use(express.static('public'));  //mention which folder are you using for static file
 
-   //Create a specific path for images folder on path images 
-   app.use('/item', express.static('images'));
+     //Create a specific path for images folder on path images 
+     app.use('/item', express.static('images'));
 
+   
+     //JSON data object 
+     //{"hello": "JSON is cool"}, use the  middleware to ingest it and stringfy it to send it to the database 
+     
+     //URLEncoded data 
+     //full path of the endpoint and at the end of it 
+     //hello = URLEncoded+is+cool
+
+     //method to use JSON
+     app.use(express.json())
+     //create the post and the url route that we need to do the post 
+     app.post('/newItem', (req, res) =>{
+          console.log(req.body);
+          //response to the frontend 
+          res.send(req.body);
+     })
    //route = provide you with the data or fille that you requested 
    //getting data == and response with data / take the path of that command and passing arguments (request & response)
    app.get('/', (req, res) => 
