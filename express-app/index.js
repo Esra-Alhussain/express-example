@@ -1,7 +1,9 @@
 import express from 'express';
-import data from './data/data.json'
+import data from './data/data.json';
+import favicon from 'serve-favicon';
+import path from 'path';
 
-const app = express();  //create a variable tat will hold copy of express
+const app = express();  //create a variable that will hold copy of express
 const PORT = 3000;
 
      app.get('/item/end', (req,res) =>
@@ -20,9 +22,9 @@ const PORT = 3000;
      app.use(express.static('public'));  //mention which folder are you using for static file
 
      //Create a specific path for images folder on path images 
-     app.use('/item', express.static('images'));
-
-   
+     app.use('/images', express.static('images'));
+     //import favicon and the path 
+     app.use(favicon(path.join(__dirname, 'public', 'favicon.ico'))) //load the favicon from the public folder 
      //JSON data object 
      //{"hello": "JSON is cool"}, use the  middleware to ingest it and stringfy it to send it to the database 
      
@@ -34,6 +36,10 @@ const PORT = 3000;
      // app.use(express.json());
      //change the type of data that I pass to the post command
      app.use(express.urlencoded({extended: true}))      //extended=> explicit the QS stringfy version to use
+
+     //This is for proxies
+     app.set('trust proxy', 'loopback');
+     
      //create the post and the url route that we need to do the post 
      app.post('/newItem', (req, res) =>{
           console.log(req.body);
@@ -96,8 +102,8 @@ const PORT = 3000;
           res.status(500).send(`Red alert! Red alert!: ${err.stack}`);   
      })
      app.listen(PORT, () =>  {    //listen to the port that we just created 
-          console.log(`Yourr server is runing on port ${PORT}`);
+          console.log(`Your server is runing on port ${PORT}`);
           //load data file on the server
-          console.log(data);
+          // console.log(data);
           });
 
